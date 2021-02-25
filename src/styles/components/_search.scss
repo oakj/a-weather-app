@@ -1,0 +1,32 @@
+.search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .search__box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $color-light-grey;
+        height: 3rem;
+        width: 43rem;
+        border-radius: 2.5rem;
+
+        .search__img {
+            width: 1.8rem;
+        }
+
+        .search__input {
+            background-color: $color-light-grey;
+            color: $color-dark-grey;
+            width: 37rem;
+            margin-left: .5rem;
+            border: none;
+
+            &:focus,
+            &:active {
+                outline: none;
+            }
+        }
+    }
+}

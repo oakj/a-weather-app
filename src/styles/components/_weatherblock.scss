@@ -1,0 +1,16 @@
+.weatherblock-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .weatherblock {
+        width: 43rem;
+        height: 10rem;
+        background-color: $color-primary-white;
+        margin-top: 1rem;
+        border-radius: 2.5rem;
+    }
+}
+
+
+

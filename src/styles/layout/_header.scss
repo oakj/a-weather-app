@@ -1,8 +1,9 @@
-@import 'App';
-
-.container {
+.header__container {
     display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: $color-primary-blue;
+    height: $header-height;
 
     h1 {
         font-size: 2.4rem;
@@ -10,7 +11,8 @@
     }
 }
 
-img {
+.header__img {
     width: 3rem;
     color: $color-primary-white;
+    margin-right: 1rem;
 }

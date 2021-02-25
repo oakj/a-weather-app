@@ -1,0 +1,5 @@
+.body-container {
+    background: linear-gradient(to bottom, $color-primary-blue, #C4C4C4);
+    height: calc(100vh - #{$header-height});
+}
+

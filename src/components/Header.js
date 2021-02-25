@@ -1,13 +1,13 @@
 import cloudSun from '../assets/cloud-sun.svg'
-import '../styles/Header.scss'
 
 const Header = () => {
+    
     return (
         <>
-            <div className="container">
-                <img src={cloudSun} alt="weather-logo"/>
+            <header className="header__container">
+                <img className="header__img" src={cloudSun} alt="weather-logo"/>
                 <h1>a weather app</h1>
-            </div>
+            </header>
         </>
     );
 }
