@@ -1,0 +1,16 @@
+@import 'App';
+
+.container {
+    display: flex;
+    background-color: $color-primary-blue;
+
+    h1 {
+        font-size: 2.4rem;
+        color: $color-primary-white;
+    }
+}
+
+img {
+    width: 3rem;
+    color: $color-primary-white;
+}

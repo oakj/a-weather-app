@@ -1,0 +1,19 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    // this seets the root font-size by calculating 10/16
+    // where 10 is the intended default font size (easier to do rem calculations)
+    // where 16 is the browser default font size
+    // percentage is used so that if the user changes the default font size, this app will scale appropriately
+    font-size: 62.5%; // 1rem = 10px
+}
+
+body {
+    box-sizing: border-box; // this line makes it so border size is not caluclated in total width/height calculations
+}
