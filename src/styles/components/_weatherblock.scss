@@ -1,16 +1,166 @@
-.weatherblock-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.loading {
+    color: $color-primary-white;
+    font-size: 1.6rem;
+    margin-top: 1rem;
+}
 
-    .weatherblock {
-        width: 43rem;
-        height: 10rem;
-        background-color: $color-primary-white;
-        margin-top: 1rem;
-        border-radius: 2.5rem;
+.weatherblock {
+    width: 43rem;
+    height: 10rem;
+    background-color: $color-primary-white;
+    margin-top: 1rem;
+    border-radius: 2.5rem;
+    padding: 1rem 2rem 1rem 2rem;
+
+    //flexbox
+    display: flex;
+
+    .box-1 {
+        //background-color:orangered;
+        flex: 6;
+
+        .name {
+            font-size: 1.6rem;
+            color: $color-primary-black;
+        }
+
+        .region-country {
+            font-size: 1.2rem;
+        }
+
+        .date {
+            font-size: 1.2rem;
+        }
+
+        .time {
+            font-size: 1.2rem;
+        }
+
+        .save {
+            font-size: 1.2rem;
+
+            &:hover {
+                cursor: pointer;
+                color: $color-primary-black;
+            }
+
+            &:active {
+                font-size: 1.3rem;
+            }
+        }
+
+        .toggleinfo {
+            font-size: 1.2rem;
+
+            &:hover {
+                cursor: pointer;
+                color: $color-primary-black;
+            }
+
+            &:active {
+                font-size: 1.3rem;
+            }
+        }
+    }
+
+    .box-2 {
+        //background-color: orchid;
+        flex: 2;
+
+        //flexbox
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .icon {
+            width: 6rem;
+        }
+
+        .description {
+            font-size: 1.2rem;
+        }
+    }
+
+    .box-3 {
+        //background-color: palegoldenrod;
+        flex: 3;
+
+        //flexbox
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .temperature {
+            font-size: 6rem;
+            color: $color-primary-black;
+        }
+
+        .feelslike {
+            font-size: 1.2rem;
+        }
+    }
+
+    .box-4 {
+        //background-color: paleturquoise;
+        flex: 1;
+
+        //flexbox
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .unit {
+            font-size: 1.2rem;
+        }
+
+        .f {
+            font-size: 1.2rem;
+            padding: .25rem .5rem .25rem .5rem;
+            margin-top: .5rem;
+            margin-bottom: .25rem;
+            border-radius: .25rem;
+            background-color: $color-light-grey;
+            color: $color-primary-black;
+
+            .f--selected {
+                background-color: $color-light-grey;
+                color: $color-primary-black;
+            }
+        }
+
+        .c {
+            font-size: 1.2rem;
+            padding: .25rem .5rem .25rem .5rem;
+            margin-top: .25rem;
+            margin-bottom: .25rem;
+            border-radius: .5rem;
+            //background-color: $color-light-grey;
+            //color: $color-primary-black;
+
+            .c--selected {
+                background-color: $color-light-grey;
+                color: $color-primary-black;
+            }
+        }
     }
 }
 
+.weatherblock__moreinfo {
+    width: 43rem;
+    height: 7rem;
+    background-color: $color-primary-white;
+    margin-top: 1rem;
+    border-radius: 2.5rem;
+    padding: 1rem 2rem 1rem 2rem;
 
+    //flexbox
+    display: flex;
 
+    .box-1 {
+        //background-color:orangered;
+        flex: 12;
+    }
+}

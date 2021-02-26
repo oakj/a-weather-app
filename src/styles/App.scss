@@ -1,8 +1,9 @@
-// base
-@import 'base/base';
-
 // utils
 @import 'utils/variables';
+
+// base
+@import 'base/base';
+@import 'base/typography';
 
 // components
 @import 'components/search';
