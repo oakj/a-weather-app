@@ -1,10 +1,14 @@
-const weather = (address, unit) => {
-    // unit can be 'f' for farenheit or 'm' for metric
-    const url = `http://api.weatherstack.com/current?access_key=${process.env.REACT_APP_WEATHER_STACK_KEY}&query=${address}&units=${unit}`
+import { useEffect } from 'react'
 
-    const response = fetch(url)
-    const data = response.json()
-    return data
+const weather = ( url ) => {
+    let data = {}
+    useEffect( async () => { //useEffect so that the api doesn't get fetched on every render
+        const response = await fetch(url)
+        const data = await response.json()
+        console.log('weather.js useEffect: ', data)
+        return(data)
+    }, [])
+    return(data)
 }
 
 export default weather

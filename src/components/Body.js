@@ -1,13 +1,17 @@
 import Search from './Search'
 import WeatherBlock from './WeatherBlock'
 
-const Body = () => {
+const Body = ({ search, setSearch }) => {
 
     return (
         <>
             <div className="body-container">
-                <Search/>
-                <WeatherBlock/>
+                <Search 
+                    setSearch={setSearch}
+                />
+                <WeatherBlock 
+                    search={search}
+                />
             </div>
         </>
     );

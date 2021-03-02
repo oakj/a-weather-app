@@ -9,23 +9,21 @@ import snowy from '../assets/weather-descriptions/snowy-6.svg'
 import sunnyDay from '../assets/weather-descriptions/sunny-day.svg'
 import thunder from '../assets/weather-descriptions/thunder.svg'
 
-const WeatherBlock = () => {
-    // show loading weather data
-    const [loading, setLoading] = useState(false)
-
+const WeatherBlock = ({ search }) => {
     // fetch forecast data from weather stack api
-    const [forecast, setForecast] = useState(null)
-    const address = 'boston'
+    const [forecast, setForecast] = useState({ data: null, loading: true})
     const unit = 'f'
-    const url = `http://api.weatherstack.com/current?access_key=${process.env.REACT_APP_WEATHER_STACK_KEY}&query=${address}&units=${unit}`
-    useEffect( async () => { //useEffect so that the api doesn't get fetched on every render
-        const response = await fetch(url)
-        const data = await response.json()
-        console.log('WeatherBlock.js useEffect: ', data)
-        setForecast(data)
-    }, [])
+    const url = `http://api.weatherstack.com/current?access_key=${process.env.REACT_APP_WEATHER_STACK_KEY}&query=${search}&units=${unit}`
 
-    console.log('WeatherBlock.js forecast:\n', forecast)
+    useEffect(() => { //useEffect so that the api only renders when search state is changed
+        setForecast({ data: null, loading: true})
+        fetch(url)
+            .then(response => response.json())
+            .then(json => setForecast({ data: json, loading: false}))
+
+        console.log('search state\n', search)
+        console.log('useEffect\nforecast', forecast)
+    }, [search])
 
     // toggle more info
     const [toggleinfo, setToggleInfo] = useState(false)
@@ -33,38 +31,35 @@ const WeatherBlock = () => {
     return (
         <>
             {
-                forecast ?
-                    loading ?
-                        <div className="loading">Fetching weather data...</div>
-                    :
-                        <div className="weatherblock">
-                            <div className="box-1">
-                                <div className="name">{forecast.location.name}</div>
-                                <div className="region">{forecast.location.region}</div>
-                                <div className="country">{forecast.location.country}</div>
-                                <div className="date">{dayjs().format('dddd MMMM DD, YYYY')}</div>
-                                <div className="time">{dayjs().format('h:mm a')}</div>
-                                <div className="info-save-container">
-                                    <div className="toggleinfo" onClick={() => setToggleInfo(!toggleinfo)}>more info</div>
-                                    <div className="save" onClick={() => setToggleInfo(!toggleinfo)}>save</div>
-                                </div>
-                            </div>
-                            <div className="box-2">
-                                <img className="icon" src={sunnyDay} alt="weather_icon"/>
-                                <div className="description">{forecast.current.weather_descriptions[0]}</div>
-                            </div>
-                            <div className="box-3">
-                                <div className="temperature">{forecast.current.temperature}</div>
-                                <div className="feelslike">feels like: {forecast.current.feelslike}</div>
-                            </div>
-                            <div className="box-4">
-                                <div className="unit">unit</div>
-                                <div className="f">F</div>
-                                <div className="c">C</div>
+                search === '' ? 
+                    <div>Enter an address</div> 
+                :
+                    <div className="weatherblock">
+                        <div className="box-1">
+                            <div className="name">{forecast.location.name}</div>
+                            <div className="region">{forecast.location.region}</div>
+                            <div className="country">{forecast.location.country}</div>
+                            <div className="date">{dayjs().format('dddd MMMM DD, YYYY')}</div>
+                            <div className="time">local time: {dayjs().format('h:mm a')}</div>
+                            <div className="info-save-container">
+                                <div className="toggleinfo" onClick={() => setToggleInfo(!toggleinfo)}>more info</div>
+                                <div className="save" onClick={() => setToggleInfo(!toggleinfo)}>save</div>
                             </div>
                         </div>
-                :
-                    <div>empty div</div>
+                        <div className="box-2">
+                            <img className="icon" src={sunnyDay} alt="weather_icon"/>
+                            <div className="description">{forecast.current.weather_descriptions[0]}</div>
+                        </div>
+                        <div className="box-3">
+                            <div className="temperature">{forecast.current.temperature}</div>
+                            <div className="feelslike">feels like: {forecast.current.feelslike}</div>
+                        </div>
+                        <div className="box-4">
+                            <div className="unit">unit</div>
+                            <div className="f">F</div>
+                            <div className="c">C</div>
+                        </div>
+                    </div>
             }
             {
                 toggleinfo ?
