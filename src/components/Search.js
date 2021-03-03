@@ -2,6 +2,7 @@ import { useState } from 'react'
 import magnify from '../assets/magnifying-glass.svg'
 
 const Search = ({ setSearch }) => {
+    console.log('Search.js render')
     const [input, setInput] = useState('')
 
     const handleSubmit = e => {

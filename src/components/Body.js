@@ -2,6 +2,7 @@ import Search from './Search'
 import WeatherBlock from './WeatherBlock'
 
 const Body = ({ search, setSearch }) => {
+    console.log('Body.js render')
 
     return (
         <>

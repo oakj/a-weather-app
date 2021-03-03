@@ -4,6 +4,7 @@ import Header from './components/Header'
 import Body from './components/Body'
 
 function App() {
+    console.log('App.js render')
     const [search, setSearch] = useState('')
 
     return (

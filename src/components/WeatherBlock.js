@@ -10,19 +10,22 @@ import sunnyDay from '../assets/weather-descriptions/sunny-day.svg'
 import thunder from '../assets/weather-descriptions/thunder.svg'
 
 const WeatherBlock = ({ search }) => {
+    console.log('WeatherBlock.js render')
     // fetch forecast data from weather stack api
-    const [forecast, setForecast] = useState({ data: null, loading: true})
+    const [forecast, setForecast] = useState({data:null, loading:true})
     const unit = 'f'
     const url = `http://api.weatherstack.com/current?access_key=${process.env.REACT_APP_WEATHER_STACK_KEY}&query=${search}&units=${unit}`
 
-    useEffect(() => { //useEffect so that the api only renders when search state is changed
-        setForecast({ data: null, loading: true})
-        fetch(url)
-            .then(response => response.json())
-            .then(json => setForecast({ data: json, loading: false}))
+    const fetchWeather = async (url) => {
+        const response = await fetch(url)
+        const json = await response.json()
+        setForecast({ data:json, loading:false })
+    }
 
-        console.log('search state\n', search)
-        console.log('useEffect\nforecast', forecast)
+    useEffect(() => { // useEffect with search as a dependency so that it only runs when search changes
+        if (search !== '') { // if statement so that this fetchWeather(url) does not run on initial render (this results in a failed API call because search query === '')
+            fetchWeather(url)
+        }
     }, [search])
 
     // toggle more info
@@ -31,44 +34,43 @@ const WeatherBlock = ({ search }) => {
     return (
         <>
             {
-                search === '' ? 
-                    <div>Enter an address</div> 
-                :
-                    <div className="weatherblock">
-                        <div className="box-1">
-                            <div className="name">{forecast.location.name}</div>
-                            <div className="region">{forecast.location.region}</div>
-                            <div className="country">{forecast.location.country}</div>
-                            <div className="date">{dayjs().format('dddd MMMM DD, YYYY')}</div>
-                            <div className="time">local time: {dayjs().format('h:mm a')}</div>
-                            <div className="info-save-container">
-                                <div className="toggleinfo" onClick={() => setToggleInfo(!toggleinfo)}>more info</div>
-                                <div className="save" onClick={() => setToggleInfo(!toggleinfo)}>save</div>
-                            </div>
-                        </div>
-                        <div className="box-2">
-                            <img className="icon" src={sunnyDay} alt="weather_icon"/>
-                            <div className="description">{forecast.current.weather_descriptions[0]}</div>
-                        </div>
-                        <div className="box-3">
-                            <div className="temperature">{forecast.current.temperature}</div>
-                            <div className="feelslike">feels like: {forecast.current.feelslike}</div>
-                        </div>
-                        <div className="box-4">
-                            <div className="unit">unit</div>
-                            <div className="f">F</div>
-                            <div className="c">C</div>
+                search === '' ? null :
+                (forecast.loading && !forecast.data) ? <div className="loading">Loading...</div> :
+                <div className="weatherblock">
+                    <div className="box-1">
+                        <div className="name">{forecast.data.location.name}</div>
+                        <div className="region">{forecast.data.location.region}</div>
+                        <div className="country">{forecast.data.location.country}</div>
+                        <div className="date">{dayjs().format('dddd MMMM DD, YYYY')}</div>
+                        <div className="time">Your local time: {dayjs().format('h:mm a')}</div>
+                        <div className="info-save-container">
+                            <div className="toggleinfo" onClick={() => setToggleInfo(!toggleinfo)}>more info</div>
+                            <div className="save" onClick={() => setToggleInfo(!toggleinfo)}>save</div>
                         </div>
                     </div>
+                    <div className="box-2">
+                        <img className="icon" src={sunnyDay} alt="weather_icon"/>
+                        <div className="description">{forecast.data.current.weather_descriptions[0]}</div>
+                    </div>
+                    <div className="box-3">
+                        <div className="temperature">{forecast.data.current.temperature}</div>
+                        <div className="feelslike">feels like: {forecast.data.current.feelslike}</div>
+                    </div>
+                    <div className="box-4">
+                        <div className="unit">unit</div>
+                        <div className="f">F</div>
+                        <div className="c">C</div>
+                    </div>
+                </div>
             }
             {
                 toggleinfo ?
                     <div className="weatherblock__moreinfo">
                         <div className="box-1">
-                            <div className="humidity">humidity: {forecast.current.humidity}</div>
-                            <div className="precip">chance of precipitation: {forecast.current.precip}</div>
-                            <div className="windspeed">wind speed: {forecast.current.wind_speed}</div>
-                            <div className="winddirection">wind direction: {forecast.current.wind_dir}</div>
+                            <div className="humidity">humidity: {forecast.data.current.humidity}</div>
+                            <div className="precip">chance of precipitation: {forecast.data.current.precip}</div>
+                            <div className="windspeed">wind speed: {forecast.data.current.wind_speed}</div>
+                            <div className="winddirection">wind direction: {forecast.data.current.wind_dir}</div>
                         </div>
                     </div>
                 :
