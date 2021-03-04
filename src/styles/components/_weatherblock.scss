@@ -7,16 +7,6 @@
     padding: 1rem 2rem 1rem 2rem;
 }
 
-.error {
-    width: 43rem;
-    height: 12rem;
-    background-color: $color-primary-white;
-    margin-top: 1rem;
-    border-radius: 2.5rem;
-    padding: 1rem 2rem 1rem 2rem;
-    font-size: 1.6rem;
-}
-
 .weatherblock {
     width: 43rem;
     height: 12rem;
@@ -94,7 +84,6 @@
                 border-color: $color-primary-blue;
                 border-style: solid;
                 border-width: .1rem;
-                visibility: hidden; // temporarily hidden until feature is ready for deployment
     
                 &:hover {
                     cursor: pointer;
@@ -177,7 +166,13 @@
             margin-top: .5rem;
             margin-bottom: .25rem;
             border-radius: .25rem;
-            cursor: pointer;
+            background-color: $color-light-grey;
+            color: $color-primary-black;
+
+            .f--selected {
+                background-color: $color-light-grey;
+                color: $color-primary-black;
+            }
         }
 
         .c {
@@ -186,12 +181,13 @@
             margin-top: .25rem;
             margin-bottom: .25rem;
             border-radius: .5rem;
-            cursor: pointer;
-        }
+            //background-color: $color-light-grey;
+            //color: $color-primary-black;
 
-        .selected {
-            background-color: $color-light-grey;
-            color: $color-primary-black;
+            .c--selected {
+                background-color: $color-light-grey;
+                color: $color-primary-black;
+            }
         }
     }
 }
