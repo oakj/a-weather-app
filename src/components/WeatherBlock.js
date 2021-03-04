@@ -61,6 +61,7 @@ const WeatherBlock = ({ search }) => {
             case 'Heavy freezing drizzle':
             case 'Patchy light rain':
             case 'Light rain':
+            case 'Light rain shower':
             case 'Moderate rain at times':
             case 'Moderate rain':
             case 'Heavy rain at times':
