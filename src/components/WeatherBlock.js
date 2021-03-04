@@ -22,7 +22,7 @@ const WeatherBlock = ({ search }) => {
     // fetch forecast data from weather stack api
     const [forecast, setForecast] = useState({data:null, loading:true})
     const [unit, setUnit] = useState('f')
-    const url = `http://api.weatherstack.com/current?access_key=${process.env.REACT_APP_WEATHER_STACK_KEY}&query=${search}&units=${unit}`
+    const url = `https://api.weatherstack.com/current?access_key=${process.env.REACT_APP_WEATHER_STACK_KEY}&query=${search}&units=${unit}`
 
     const fetchWeather = async (url) => {
         const response = await fetch(url)
